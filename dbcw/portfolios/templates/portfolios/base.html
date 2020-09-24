@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+
+    {% block head_ext %}{% endblock %}
+</head>
+
+<body>
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+  <h5 class="my-0 mr-md-auto font-weight-normal">
+    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-book-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" d="M8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/>
+    </svg>
+    Портфолио
+  </h5>
+
+  <form class="form-inline my-2 my-lg-0 mr-sm-3">
+    <div class="input-container">
+      <input class="form-control" type="text" placeholder="&#xf002" aria-label="Search" style="font-family:Arial, FontAwesome">
+    </div>
+  </form>
+
+  <nav class="my-2 my-md-0 mr-md-3">
+      <a class="p-2 text-dark" href="{% url 'home' %}">Главная</a>
+      <a class="p-2 text-dark" href="{% url 'about' %}">О проекте</a>
+  </nav>
+
+  {% if is_authenticated %}
+  <a class="btn btn-outline-primary" href="#">Выйти</a>
+  {% else %}
+  <a class="btn btn-outline-primary mr-sm-2" href="{% url 'login' %}">Войти</a>
+  <a class="btn btn-outline-primary" href="{% url 'join' %}">Регистрация</a>
+  {% endif %}
+  {% block buttons %}{% endblock %}
+
+    </div>
+
+    <div class="container">
+    {% block content %}{% endblock %}
+    </div>
+
+</body>
+
+</html>

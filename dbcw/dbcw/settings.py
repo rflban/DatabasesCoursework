@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'portfolios'
 ]
 
 MIDDLEWARE = [
@@ -51,10 +52,16 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'dbcw.urls'
 
+import os
+SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates'),
+            os.path.join(BASE_DIR, 'portfolios', 'templates', 'portfolios'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
