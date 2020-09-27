@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.forms import ModelForm, CharField, \
                          TextInput, PasswordInput, \
                          EmailInput, DateInput, \
-                         Form
+                         Form, ChoiceField, Textarea
 
 from . import models
 
@@ -105,5 +105,72 @@ class AuthUserForm(Form):
         "id": "password",
         "class": "form-control mt-2",
         "placeholder": "Пароль",
+        "required": "",
+    })
+
+
+class SearchForm(Form):
+    searching = CharField()
+
+    searching.label = ''
+    searching.widget.attrs.update({
+        "type": "text",
+        "class": "form-control",
+        # "placeholder": "&#xf002",
+        # "placeholder": "",
+        "placeholder": "\uF002",
+        "style": "font-family:Arial, FontAwesome",
+        "required": "",
+    })
+
+
+class PortfolioForm(Form):
+    values = models.Profession.objects.all()
+    choices = []
+    for i in range(len(values)):
+        choices.append((values[i].name, values[i].name))
+
+    profession = ChoiceField(choices=choices)
+    description = CharField(widget=Textarea)
+
+    profession.widget.attrs.update({
+        "id": "inputProfession",
+        "class": "form-control mb-2",
+        "required": "",
+    })
+    description.widget.attrs.update({
+        "id": "inputDescription",
+        "class": "form-control",
+        "required": "",
+        "rows": "10",
+    })
+
+
+class PostForm(Form):
+    title = CharField(max_length=50)
+    content = CharField(widget=Textarea)
+
+    title.widget.attrs.update({
+        "class": "form-control mt-3 mb-3",
+        "type": "text",
+        "placeholder": "Заголовок",
+        "required": "",
+    })
+    content.widget.attrs.update({
+        "id": "autoresizing",
+        "class": "form-control",
+        "placeholder": "Расскажите о своих достижениях...",
+        "rows": "5",
+        "required": "",
+    })
+
+
+class CommentForm(Form):
+    content = CharField(widget=Textarea, max_length=140)
+    content.widget.attrs.update({
+        "id": "autoresizing",
+        "class": "form-control",
+        "placeholder": "Напишите, что думаете по этому поводу...",
+        "rows": "2",
         "required": "",
     })

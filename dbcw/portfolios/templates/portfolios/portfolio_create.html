@@ -1,0 +1,38 @@
+{% extends 'portfolios/base.html' %}
+
+{% block head_ext %}
+<link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
+{% endblock %}
+
+{% block title %}
+Создать портфолио
+{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">
+  Создать портфолио
+</h2>
+<div style="width: 60%; margin: 0 auto">
+<form method="post">
+{% csrf_token %}
+
+<label for="inputProfession"><h5>Профессия</h5></label>
+{{ portfolio_form.profession }}
+<label for="inputDescription" class='mt-2'><h5>Описание</h5></label>
+{{ portfolio_form.description }}
+
+<div class="form-inline mt-3">
+  <button class="btn btn-success mr-md-2" type='submit'>Создать</button>
+  <a type="button" class="btn btn-danger" href="{% url 'profile' %}">Отмена</a>
+</div>
+
+</form>
+
+{% if alert %}
+<div class="alert alert-danger mt-3" role="alert">
+    {{ alert }}
+</div>
+{% endif %}
+
+</div>
+{% endblock %}

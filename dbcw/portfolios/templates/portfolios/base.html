@@ -22,19 +22,25 @@
     Портфолио
   </h5>
 
-  <form class="form-inline my-2 my-lg-0 mr-sm-3">
+  <form class="form-inline my-2 my-lg-0 mr-sm-3" method="post">
+    {% csrf_token %}
+
     <div class="input-container">
-      <input class="form-control" type="text" placeholder="&#xf002" aria-label="Search" style="font-family:Arial, FontAwesome">
+      {{ search_form }}
+      {% comment %}<input class="form-control" type="text" placeholder="&#xf002" aria-label="Search" style="font-family:Arial, FontAwesome">{% endcomment %}
     </div>
   </form>
 
   <nav class="my-2 my-md-0 mr-md-3">
       <a class="p-2 text-dark" href="{% url 'home' %}">Главная</a>
+      {% if is_authenticated %}
+      <a class="p-2 text-dark" href="{% url 'profile' %}">Профиль</a>
+      {% endif %}
       <a class="p-2 text-dark" href="{% url 'about' %}">О проекте</a>
   </nav>
 
   {% if is_authenticated %}
-  <a class="btn btn-outline-primary" href="#">Выйти</a>
+  <a class="btn btn-outline-primary" href="{% url 'logout' %}">Выйти</a>
   {% else %}
   <a class="btn btn-outline-primary mr-sm-2" href="{% url 'login' %}">Войти</a>
   <a class="btn btn-outline-primary" href="{% url 'join' %}">Регистрация</a>
