@@ -19,6 +19,14 @@
 \usepackage{soul}
 \usepackage{ulem}
 
+\newfontfamily{\cyrillicfonttt}{Courier New}
+\setmonofont{Courier New}
+
+\usepackage[numbers]{natbib}
+\bibpunct{}{}{,}{s}{}{,}
+\renewcommand*{\bibnumfmt}[1]{#1.}
+\renewcommand{\bibsection}{\chapter*{\hfill{}СПИСОК ИСПОЛЬЗОВАННЫХ ИСТОЧНИКОВ\hfill{}}}
+
 \usepackage{polyglossia}
 \setdefaultlanguage{russian}
 \setotherlanguages{english}
