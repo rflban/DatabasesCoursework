@@ -38,7 +38,7 @@
 \subsection{Модели}%
 \label{sub:modeli}
 
-В листинге~\ref{lst:models} представлены модели Django данного проекта.
+Для общения с базой данных в Django используются модели. В программе они являются единственным источником хранимых данных и по сути представляют из себя отображение таблиц базы данных (в случае реляционной модели). Каждая модель наследуется от базового класса Model, который реализует необходимую для взаимодействия с базой данную функциональность. Каждое поле модели представляет соответствующий атрибут таблицы. В листинге~\ref{lst:models} представлены модели Django данного проекта.
 
 \begin{lstlisting}[caption={Модели Django}, label=lst:models]
 from django.db import models
@@ -95,6 +95,28 @@ class Comment(models.Model):
     create_time = models.DateTimeField('create_time')
 \end{lstlisting}
 
+\subsection{Менеджмент URL}%
+В листинге~\ref{lst:urls} представлен фрагмент исходного кода приложения, отвечающий за связь представлений и URL.
+
+\label{sub:menedzhment_url}
+\begin{lstlisting}[caption={Менеджмент URL}, label=lst:urls]
+urlpatterns = [
+    path('', views.root, name='root'),
+    path('home/', views.index, name='home'),
+    path('about/', views.about, name='about'),
+    path('search/<str:searching>', views.search, name='search'),
+    path('login/', views.login, name='login'),
+    path('logout/', views.logout, name='logout'),
+    path('join/', views.join, name='join'),
+    path('profile/', views.profile, name='profile'),
+    path('create/', views.create, name='create'),
+    path('user/<str:username>', views.user, name='user'),
+    path('portfolio/<int:portfolio_id>', views.portfolio, '
+         'name='portfolio'),
+    path('post/<int:post_id>', views.post, name='post'),
+]
+\end{lstlisting}
+
 \section{Описание интерфейса программы}%
 \label{sec:opisanie_interfeisa_programmy}
 
@@ -144,16 +166,16 @@ class Comment(models.Model):
     \caption{Страница записи}\label{img:scr_06}
 \end{figure}
 
-\section{Апробация}%
+\section{Тестирование}%
 \label{sec:aprobatsiia}
+Было проведено функциональное тестирование белого ящика, в ходе которого программа отработала правильно. Кроме того было проведено тестирование пользовательского интерфейса: попытка регистрации существующего пользователя, попытка создания повторяющегося портфолио, проведение поиска пользователей по имени пользователя, просмотр персональных страниц, записей и т.д., все элементы интерфейса реагируют корректно. Ожидаемое поведение приложения совпадает с полученными результатами.
+
 Апробация проводилась на ноутбуке, подключённом к сети питания. Конфигурация ноутбука:
 \begin{itemize}
     \item процессор Intel Core i5--8400H 2.5 ГГц;
     \item 8 гб ОЗУ;
     \item ОС Ubuntu 20.04.
 \end{itemize}
-
-Апробация показала работоспособность программы.
 
 \section{Выводы}%
 \label{sec:vyvody_impl}
